@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
+import dotenv from 'dotenv';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -17,6 +18,7 @@ const firebaseConfig = {
   measurementId: "G-RG9CL5RXR8"
 };
 
+// dotenv.config()
 // const firebaseConfig = {
 //   apiKey: process.env.API_KEY,
 //   authDomain: process.env.AUTH_DOMAIN,

@@ -1,6 +1,8 @@
 'use client'
-import { Box, Stack, Typography, Button, Modal, TextField, Autocomplete } from '@mui/material'
+import { Box, Stack, Typography, Button, Modal, TextField, Autocomplete, Fab } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
+import ClearIcon from '@mui/icons-material/Clear';
+import AddIcon from '@mui/icons-material/Add';
 import { firestore } from '@/firebase';
 import { collection, query, getDocs, setDoc, getDoc, deleteDoc, doc, where } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
@@ -11,7 +13,7 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
-  bgcolor: 'background.paper',
+  bgcolor: 'black',
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
@@ -99,7 +101,6 @@ export default function Home() {
       flexDirection={'column'}
       alignItems={'center'}
       gap={2}
-
     >
       <Modal
         open={open}
@@ -107,7 +108,7 @@ export default function Home() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={style} >
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Add Item
           </Typography>
@@ -134,18 +135,18 @@ export default function Home() {
       <Typography variant={'h2'} textAlign={'center'}>
         Pantry Items
       </Typography>
-      <Box border={'1px solid black'}>
+      <Box border={'1px solid white'} borderRadius={'10px'}>
         <Box width="800px"
-          height="100px" bgcolor={'black'}
+          borderRadius={'10px'}
+          height="15%" 
           display={'flex'}
           flexDirection={'column'}
           alignItems={'center'}
           justifyContent={'center'}
         >
           <Stack direction="row" justify-content={"space-between"} alignContent={'center'} spacing={2} width="70%">
-            <Stack direction="row" width="60%" >
               <Autocomplete
-                sx={{ 'bgcolor': 'white' }}
+                sx={{color: 'white'}}
                 inputValue={searchInput}
                 clearOnEscape
                 //onInputChange={(e, newInputValue) => {setSearchInput(newInputValue) }}
@@ -154,34 +155,30 @@ export default function Home() {
                 freeSolo
                 fullWidth
                 options={pantry.map(({ name, count }) => name)}
-                renderInput={(params) => <TextField {...params} label={<SearchIcon></SearchIcon>} />}
+                renderInput={(params) => <TextField {...params} label={<SearchIcon></SearchIcon> }  />}
               />
-              <Button variant="contained"
-                onClick={() => {
-                  console.log('searching for', searchInput)
-                  handleSearch(searchInput)
-                }}>
-                Search
-              </Button>
-            </Stack>
-            <Button variant="contained" onClick={handleOpen}>Add Item</Button>
-            <Button variant="contained">
-              Filter
-            </Button>
+            <Fab color="primary" aria-label="add" onClick={handleOpen}>
+              <AddIcon />
+            </Fab>
+            {/* <Button variant="contained" onClick={handleOpen}>Add Item</Button> */}
           </Stack>
         </Box>
         <Box width="800px"
-          height="10%" bgcolor={'black'}
+          height="8%"
           display={'flex'}
           flexDirection={'column'}
           alignItems={'center'}
           justifyContent={'center'}
           sx={{ 'bgcolor': 'red' }}>
-          <Stack direction='row' width={'100%'} alignItems={'start'} padding={5}>
-            <Typography>
+          <Stack direction='row' width="100%"
+            display={"flex"}
+            justifyContent={"start"}
+            alignItems={"center"}
+            paddingX={5}>
+            <Typography width={'43%'}>
               Name
             </Typography>
-            <Typography justifyContent={'end'}>
+            <Typography>
               Quantity
             </Typography>
           </Stack>
@@ -189,7 +186,7 @@ export default function Home() {
 
         <Stack
           width="800px"
-          height="300px"
+          height="500px"
           spacing={2}
           overflow={"auto"}
         >
@@ -202,23 +199,24 @@ export default function Home() {
               display={"flex"}
               justifyContent={"space-between"}
               alignItems={"center"}
-              bgcolor={"gray"}
               paddingX={5}
+              border={'1px solid white'}
+              borderRadius={'10px'}
             >
               <Typography
                 variant={'h5'}
-                color={'black'}
-                textAlign={'center'}
+                textAlign={'left'}
+                whiteSpace={'normal'}
+                width={'8%'}
               >{name}
               </Typography>
-              <Typography variant={'h5'} color={'black'} textAlign={'center'}>
-                Quantity: {count}
+              <Typography variant={'h5'} flex={'0 0 auto'}>
+                {count}
               </Typography>
-
               <Button
                 variant={'contained'}
                 onClick={() => removeItem(name)}
-              >Remove
+              ><ClearIcon></ClearIcon>
               </Button>
             </Box>
           ))}
