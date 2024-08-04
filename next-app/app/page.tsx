@@ -6,6 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { firestore } from '@/firebase';
 import { collection, query, getDocs, setDoc, getDoc, deleteDoc, doc, where } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
+import { Height } from '@mui/icons-material';
 
 const style = {
   bgcolor: "white",
@@ -14,7 +15,6 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
-  border: '2px solid #000',
   boxShadow: 24,
   p: 4,
   gap: 3,
@@ -115,7 +115,7 @@ export default function Home() {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Add Item
           </Typography>
-          <Stack width="100%" spacing={2} display={"flex"} flexDirection={"row"}>
+          <Stack width="100%" display={"flex"} flexDirection={"row"} justifyContent={"end"} alignContent={"center"}>
             <TextField
               value={itemName}
               onChange={(e) => setItemName(e.target.value)}
@@ -223,7 +223,7 @@ export default function Home() {
                 color={"primary.dark"}
               >{name.charAt(0).toUpperCase() + name.slice(1)}
               </Typography>
-              <Typography variant={'h6'} flex={'0 0 auto'}>
+              <Typography variant={'h6'} flex={'0 0 auto'} color={"primary.dark"}>
                 {count}
               </Typography>
               <Button
