@@ -8,12 +8,12 @@ import { collection, query, getDocs, setDoc, getDoc, deleteDoc, doc, where } fro
 import { useEffect, useState } from 'react';
 
 const style = {
+  bgcolor: "white",
   position: 'absolute' as 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
-  bgcolor: 'black',
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
@@ -33,7 +33,7 @@ export default function Home() {
   const handleSearch = async (searchItem: string) => {
     setSearchInput(searchItem)
     console.log(searchItem)
-    if(searchItem == ''){
+    if (searchItem == '') {
       updatePantry();
       return;
     }
@@ -94,7 +94,9 @@ export default function Home() {
 
   return (
 
-    <Box width="100vw"
+    <Box
+    bgcolor={'primary.main'} 
+      width="100vw"
       height="100vh"
       display={'flex'}
       justifyContent={'center'}
@@ -102,6 +104,7 @@ export default function Home() {
       alignItems={'center'}
       gap={2}
     >
+      {/* modal to add an item */}
       <Modal
         open={open}
         onClose={handleClose}
@@ -129,88 +132,98 @@ export default function Home() {
               Add
             </Button>
           </Stack>
-
         </Box>
       </Modal>
+
       <Typography variant={'h2'} textAlign={'center'}>
         Pantry Items
       </Typography>
-      <Box border={'1px solid white'} borderRadius={'10px'}>
-        <Box width="800px"
-          borderRadius={'10px'}
-          height="15%" 
+      <Box width={"40%"} height={'66%'} borderRadius={'10px'}>
+        <Box width="100%"
+          height="15%"
           display={'flex'}
           flexDirection={'column'}
           alignItems={'center'}
           justifyContent={'center'}
+          bgcolor={"primary.light"}
         >
-          <Stack direction="row" justify-content={"space-between"} alignContent={'center'} spacing={2} width="70%">
+          <Stack direction="row" justify-content={"space-between"} alignContent={'start'} spacing={'35%'} width="85%">
+            <Box width={'50%'}>
               <Autocomplete
-                sx={{color: 'white'}}
                 inputValue={searchInput}
                 clearOnEscape
+                sx={{"bgcolor": "white"}}
                 //onInputChange={(e, newInputValue) => {setSearchInput(newInputValue) }}
                 onInputChange={(e, newInput) => { handleSearch(newInput) }}
                 id="search"
                 freeSolo
                 fullWidth
                 options={pantry.map(({ name, count }) => name)}
-                renderInput={(params) => <TextField {...params} label={<SearchIcon></SearchIcon> }  />}
+                renderInput={(params) => <TextField {...params} label={<SearchIcon></SearchIcon>} />}
               />
+            </Box>
             <Fab color="primary" aria-label="add" onClick={handleOpen}>
               <AddIcon />
             </Fab>
             {/* <Button variant="contained" onClick={handleOpen}>Add Item</Button> */}
           </Stack>
         </Box>
-        <Box width="800px"
+
+        <Box width="100%"
           height="8%"
           display={'flex'}
           flexDirection={'column'}
           alignItems={'center'}
           justifyContent={'center'}
-          sx={{ 'bgcolor': 'red' }}>
+          bgcolor={"primary.light"}
+
+        >
           <Stack direction='row' width="100%"
             display={"flex"}
             justifyContent={"start"}
             alignItems={"center"}
+            bgcolor="primary.light"
             paddingX={5}>
-            <Typography width={'43%'}>
+            <Typography variant={'h5'} width={'43%'}>
               Name
             </Typography>
-            <Typography>
+            <Typography variant={'h5'}>
               Quantity
             </Typography>
           </Stack>
         </Box>
 
         <Stack
-          width="800px"
-          height="500px"
+          width="100%"
+          height="350px"
           spacing={2}
           overflow={"auto"}
+          padding={'10px'}
+          bgcolor={"primary.light"}
         >
 
           {pantry.map(({ name, count }) => (
             <Box
               key={name}
               width="100%"
-              minHeight="100px"
+              minHeight="70px"
               display={"flex"}
               justifyContent={"space-between"}
               alignItems={"center"}
               paddingX={5}
-              border={'1px solid white'}
-              borderRadius={'10px'}
+              border={"1px solid white"}
+              borderRadius={'30px'}
+              bgcolor="white"
             >
               <Typography
-                variant={'h5'}
+                variant={'h6'}
                 textAlign={'left'}
                 whiteSpace={'normal'}
                 width={'8%'}
-              >{name}
+                color={"primary.dark"}
+              >{name.charAt(0).toUpperCase() + name.slice(1)}
               </Typography>
-              <Typography variant={'h5'} flex={'0 0 auto'}>
+              <Typography variant={'h6'} flex={'0 0 auto'}>
                 {count}
               </Typography>
               <Button
