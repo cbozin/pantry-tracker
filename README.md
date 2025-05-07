@@ -2,21 +2,21 @@
 
 **Pantry Tracker** is a  [Next.js](https://nextjs.org/) web application designed to help users efficiently manage their pantry inventory.
 
-## 🚀 Features
+## Features
 
 - **Item Management**: Add, edit, and remove pantry items with ease.
 - **Quantity Tracking**: Monitor item quantities to keep your pantry stocked.
 - **Search Functionality**: Quickly find items in your pantry using the search feature.
 - **Responsive Design**: Optimized for various devices, ensuring accessibility on desktops, tablets, and mobile phones.
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - **Framework**: [Next.js](https://nextjs.org/)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
 - **Styling**: [MaterialUI](https://mui.com/)
 - **Deployment**: [Vercel](https://vercel.com/)
 
-## 📦 Getting Started
+## Getting Started
 
 ### Prerequisites
 
